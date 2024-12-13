@@ -1,5 +1,6 @@
 # Simple Django Quiz App
 ## LIVE APP: [https://django-quizapp.onrender.com/](https://django-quizapp.onrender.com/)
+Render.com turns off the webapp when inactive so it might take 1-5 minutes for it to start back up again when a request to start it is made.
 
 ### How to run locally
 * Clone git repository
