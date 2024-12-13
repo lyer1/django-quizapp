@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="shortcut icon" type="image/png" href="https://img.icons8.com/?size=100&id=37896&format=png&color=000000"/>
+    <style>
+        .button-container{
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .end-f{
+            /* display: flex; */
+            float: right
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f9f9f9;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+        .question-text {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .option {
+            margin-bottom: 15px;
+        }
+        .option input {
+            margin-right: 10px;
+        }
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background-color: #58ce5e;
+        }
+        .end-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+            transform: translateY(-38px);
+        }
+        .end-btn:hover {
+            background-color: #e59292;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form method="POST" action="{% url 'submit_answer' %}">
+            {% csrf_token %}
+            <input type="hidden" name="question_id" value="{{ question.id }}">
+            <p class="question-text">{{ question.text }}</p>
+            <div class="option">
+                <label><input type="radio" name="answer" value="A"> A: {{ question.option_a }}</label>
+            </div>
+            <div class="option">
+                <label><input type="radio" name="answer" value="B"> B: {{ question.option_b }}</label>
+            </div>
+            <div class="option">
+                <label><input type="radio" name="answer" value="C"> C: {{ question.option_c }}</label>
+            </div>
+            <div class="option">
+                <label><input type="radio" name="answer" value="D"> D: {{ question.option_d }}</label>
+            </div>
+            <div class="option" {% if not question.option_e %}style="display:none;"{% endif %}>
+                <label><input type="radio" name="answer" value="E"> E: {{ question.option_e }}</label>
+            </div>
+            <button method="POST" type="submit" class="submit-btn">Submit</button>
+        </form>
+        <div class="button-container"">
+            <form class="end-f" method="GET" action="{% url 'end_quiz' %}">
+                <button type="submit" class="end-btn">End Quiz</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

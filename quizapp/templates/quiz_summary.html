@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Summary</title>
+    <link rel="shortcut icon" type="image/png" href="https://img.icons8.com/?size=100&id=37896&format=png&color=000000"/>
+    <style>
+        .new-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .new-btn:hover{
+            background-color: #52c755;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f9f9f9;
+        }
+        .summary-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="summary-container">
+        <h2>Quiz Summary</h2>
+        <p>Questions Answered: {{ questions_answered }}</p>
+        <p id="correct-ans">Correct Answers: {{ correct_answers }}</p>
+        <p id="wrong-ans">Incorrect Answers: {{ incorrect_answers }}</p>
+        <a href="{% url 'start_quiz' %}" class="new-btn">Start New Quiz</a>
+    
+    <div class="chart">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <canvas id="quizSummaryChart" style="width:100%;max-width:600px"></canvas>
+    </div>
+    <script type="text/javascript">
+       var corr = Number(document.getElementById('correct-ans').textContent.split(":")[1])
+       var wrong = Number(document.getElementById('wrong-ans').textContent.split(":")[1])
+       console.log(corr, wrong)
+
+       var labels = ["Correct Answers", "Incorrect Answers"];
+       var dataValues = [corr, wrong];
+       var colors = ["#4CAF50", "#FF5733"];
+
+       new Chart("quizSummaryChart", {
+            type: "pie",
+            data: {
+                labels: labels,
+                datasets: [{
+                    backgroundColor: colors,
+                    data: dataValues
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: `Quiz Summary`
+                }
+            }
+        });
+    </script>
+    </div>
+</body>
+</html>
