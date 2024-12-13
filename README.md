@@ -1,7 +1,7 @@
-### Simple Django Quiz App
+# Simple Django Quiz App
 ## LIVE APP: [https://django-quizapp.onrender.com/](https://django-quizapp.onrender.com/)
 
-# How to run locally
+### How to run locally
 * Clone git repository
 * Install Django, pip install django
 * open terminal and navigate to /../quiz_asgn
